@@ -36,7 +36,14 @@ const App = (props) => {
       .catch((err) => console.log(err));
   };
 
-  const addToFavorites = (movie) => {};
+  const addToFavorites = (movie) => {
+    const isAlreadyInFavorites = favoriteMovies.find(
+      (favorite) => favorite.id === movie.id
+    );
+    if (!isAlreadyInFavorites) {
+      setFavoriteMovies([...favoriteMovies, movie]);
+    }
+  };
 
   return (
     <div>
@@ -57,7 +64,10 @@ const App = (props) => {
               <AddMovieForm setMovies={setMovies} />
             </Route>
             <Route exact path="/movies/:id">
-              <Movie deleteMovie={deleteMovie} />
+              <Movie
+                deleteMovie={deleteMovie}
+                addToFavorites={addToFavorites}
+              />
             </Route>
 
             <Route exact path="/movies">
