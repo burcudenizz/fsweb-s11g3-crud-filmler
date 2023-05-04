@@ -33,14 +33,15 @@ const EditMovieForm = (props) => {
       [e.target.name]: e.target.value,
     });
   };
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .put(`http://localhost:9000/api/movies/${id}`, movie)
       .then((res) => {
-        setMovies(res.data);
-        push(`/movies/${movie.id}`);
+        setMovie(res.data);
+        history.push(`/movies/${movie.id}`);
       })
       .catch((err) => {
         console.log(err);
